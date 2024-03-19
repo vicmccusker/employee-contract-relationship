@@ -3,29 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
-use App\Models\PokemonCard;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
     public function getAll()
-
     {
         return response()->json([
             'message' => 'employee returned',
-             Employee::with(['contract:id,name'])->get()
-            ]);
+            Employee::with(['contract:id,name', 'certifications:id,name'])->get(),
+        ]);
     }
 
     public function create(Request $request)
-
     {
 
         $request->validate([
             'name' => 'required|max:30|string',
             'age' => 'required|integer',
             'start_date' => 'required|date',
-            'contract_id' => 'required|integer|exists:contracts,id'
+            'contract_id' => 'required|integer|exists:contracts,id',
         ]);
 
         $employee = new Employee();
@@ -42,19 +39,18 @@ class EmployeeController extends Controller
     }
 
     public function update(Request $request, int $id)
-
     {
 
         $request->validate([
             'name' => 'required|max:30|string',
             'age' => 'required|integer',
             'start_date' => 'required|date',
-            'contract_id' => 'required|integer|exists:contracts,id'
+            'contract_id' => 'required|integer|exists:contracts,id',
         ]);
 
         $employee = Employee::find($id);
 
-        if(!$employee) {
+        if (! $employee) {
             return response('Not here');
         }
 

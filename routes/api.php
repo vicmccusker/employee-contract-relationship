@@ -17,4 +17,5 @@ Route::get('/contracts', [\App\Http\Controllers\ContractController::class, 'getA
 Route::post('/contracts', [\App\Http\Controllers\ContractController::class, 'create']);
 Route::get('/contracts/{id}', [\App\Http\Controllers\ContractController::class, 'find']);
 Route::put('/contracts/{id}', [\App\Http\Controllers\ContractController::class, 'update']);
-Route::delete('/contracts/{id}', [\App\Http\Controllers\ContractController::class, 'delete']);
+
+Route::get('/certifications/{id}', [\App\Http\Controllers\CertificationController::class, 'find']);

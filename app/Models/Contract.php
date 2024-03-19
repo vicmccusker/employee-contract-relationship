@@ -16,5 +16,4 @@ class Contract extends Model
     {
         return $this->hasMany(Employee::class);
     }
-
 }

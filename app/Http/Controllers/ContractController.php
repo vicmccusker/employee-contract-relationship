@@ -3,28 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contract;
-use App\Models\Employee;
 use Illuminate\Http\Request;
 
 class ContractController extends Controller
 {
     public function getAll()
-
     {
         return response()->json([
             'message' => 'employee returned',
-            Contract::with(['employee:contract_id,name'])->get()
+            Contract::with(['employee:contract_id,name'])->get(),
         ]);
     }
 
-    public function create(Request $request) {
+    public function create(Request $request)
+    {
 
         $request->validate([
             'name' => 'required|max:30|string',
             'full_time' => 'boolean',
             'part_time' => 'boolean',
             'annual_hours' => 'integer|required',
-            'contractor' => 'integer'
+            'contractor' => 'integer',
         ]);
 
         $contract = new Contract();
@@ -43,7 +42,6 @@ class ContractController extends Controller
     }
 
     public function update(Request $request, int $id)
-
     {
 
         $request->validate([
@@ -51,13 +49,12 @@ class ContractController extends Controller
             'full_time' => 'required|boolean',
             'part_time' => 'required|boolean',
             'annual_hours' => 'required|integer',
-            'contractor' => 'required|integer'
+            'contractor' => 'required|integer',
         ]);
-
 
         $contract = Contract::with(['employee:contract_id,name'])->find($id);
 
-        if(!$contract) {
+        if (! $contract) {
             return response('Not here');
         }
 
@@ -78,9 +75,8 @@ class ContractController extends Controller
 
         return response()->json([
             'message' => 'Returned',
-            'data' => Contract::with(['employee:contract_id,name'])->find($id)
+            'data' => Contract::with(['employee:contract_id,name'])->find($id),
         ], 200);
 
     }
-
 }
