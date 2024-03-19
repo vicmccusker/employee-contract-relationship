@@ -19,3 +19,5 @@ Route::get('/contracts/{id}', [\App\Http\Controllers\ContractController::class, 
 Route::put('/contracts/{id}', [\App\Http\Controllers\ContractController::class, 'update']);
 
 Route::get('/certifications/{id}', [\App\Http\Controllers\CertificationController::class, 'find']);
+Route::post('/certifications', [\App\Http\Controllers\CertificationController::class, 'create']);
+Route::get('/certifications', [\App\Http\Controllers\CertificationController::class, 'get']);
