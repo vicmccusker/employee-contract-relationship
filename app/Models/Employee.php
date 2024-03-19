@@ -12,6 +12,8 @@ class Employee extends Model
 {
     use HasFactory;
 
+    public $hidden = ['pivot'];
+
     public function contract()
     {
         return $this->belongsTo(Contract::class);

@@ -10,8 +10,11 @@ class Contract extends Model
 {
     use HasFactory;
 
+    public $hidden = ['pivot'];
+
     public function employee(): HasMany
     {
         return $this->hasMany(Employee::class);
     }
+
 }
