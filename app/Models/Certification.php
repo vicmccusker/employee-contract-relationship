@@ -9,7 +9,7 @@ class Certification extends Model
 {
     use HasFactory;
 
-    public $hidden = ['pivot', 'id'];
+    public $hidden = ['pivot', 'id', 'created_at', 'updated_at'];
 
     public function employees()
     {
