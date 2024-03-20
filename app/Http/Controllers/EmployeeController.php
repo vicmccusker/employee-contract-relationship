@@ -11,7 +11,7 @@ class EmployeeController extends Controller
     {
         return response()->json([
             'message' => 'employee returned',
-            Employee::with(['contract:id,name', 'certifications:id,name'])->get(),
+            Employee::with(['contract:id,name', 'certifications:id,name,description'])->get(),
         ]);
     }
 
@@ -23,9 +23,7 @@ class EmployeeController extends Controller
             'age' => 'required|integer',
             'start_date' => 'required|date',
             'contract_id' => 'required|integer|exists:contracts,id',
-            // Because products can have multiple categories, we make sure category_ids is an array
             'certification_ids' => 'required|array',
-            // We make sure that category_ids contains only valid category ids
             'certification_ids.*' => 'integer|exists:certifications,id',
         ]);
 
@@ -40,9 +38,9 @@ class EmployeeController extends Controller
         $employee->certifications()->attach($request->certification_ids);
 
         if (! $saved) {
-            return response('not saved');
+            return response()->json(['message' => 'Did not save']);
         } else {
-            return response('saved');
+            return response()->json(['message' => 'Saved']);
         }
     }
 
@@ -59,7 +57,7 @@ class EmployeeController extends Controller
         $employee = Employee::find($id);
 
         if (! $employee) {
-            return response('Not here');
+            return response()->json(['message' => 'Not here']);
         }
 
         $employee->name = $request->name;
@@ -68,9 +66,9 @@ class EmployeeController extends Controller
         $employee->contract_id = $request->contract_id;
 
         if (! $employee->save()) {
-            return response('not saved');
+            return response()->json(['message' => 'Did not save']);
         } else {
-            return response('saved');
+            return response()->json(['message' => 'Saved']);
         }
     }
 

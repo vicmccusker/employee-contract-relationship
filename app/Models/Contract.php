@@ -10,7 +10,7 @@ class Contract extends Model
 {
     use HasFactory;
 
-    public $hidden = ['pivot'];
+    public $hidden = ['pivot', 'id'];
 
     public function employee(): HasMany
     {

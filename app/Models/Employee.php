@@ -9,7 +9,7 @@ class Employee extends Model
 {
     use HasFactory;
 
-    public $hidden = ['pivot'];
+    public $hidden = ['pivot', 'created_at', 'updated_at'];
 
     public function contract()
     {

@@ -34,9 +34,9 @@ class ContractController extends Controller
         $contract->contractor = $request->contractor;
 
         if (! $contract->save()) {
-            return response('not saved');
+            return response()->json(['message' => 'Did not save']);
         } else {
-            return response('saved');
+            return response()->json(['message' => 'Saved']);
         }
 
     }
@@ -55,7 +55,7 @@ class ContractController extends Controller
         $contract = Contract::with(['employee:contract_id,name'])->find($id);
 
         if (! $contract) {
-            return response('Not here');
+            return response()->json(['message' => 'Not here']);
         }
 
         $contract->name = $request->name;
@@ -64,9 +64,9 @@ class ContractController extends Controller
         $contract->contractor = $request->contractor;
 
         if (! $contract->save()) {
-            return response('not saved');
+            return response()->json(['message' => 'Did not save']);
         } else {
-            return response('saved');
+            return response()->json(['message' => 'Saved']);
         }
     }
 

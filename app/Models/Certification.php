@@ -9,6 +9,8 @@ class Certification extends Model
 {
     use HasFactory;
 
+    public $hidden = ['pivot', 'id'];
+
     public function employees()
     {
         return $this->belongsToMany(Employee::class);
