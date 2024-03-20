@@ -39,6 +39,6 @@ class CertificationController extends Controller
             return response()->json(['message' => 'Could not create product']);
         }
 
-            return response()->json(['message' => 'product created']);
+        return response()->json(['message' => 'product created']);
     }
 }

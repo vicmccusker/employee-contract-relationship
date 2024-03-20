@@ -26,7 +26,7 @@ class EmployeeController extends Controller
             // Because products can have multiple categories, we make sure category_ids is an array
             'certification_ids' => 'required|array',
             // We make sure that category_ids contains only valid category ids
-            'certification_ids.*' => 'integer|exists:certifications,id'
+            'certification_ids.*' => 'integer|exists:certifications,id',
         ]);
 
         $employee = new Employee();
