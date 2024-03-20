@@ -23,6 +23,10 @@ class EmployeeController extends Controller
             'age' => 'required|integer',
             'start_date' => 'required|date',
             'contract_id' => 'required|integer|exists:contracts,id',
+            // Because products can have multiple categories, we make sure category_ids is an array
+            'certification_ids' => 'required|array',
+            // We make sure that category_ids contains only valid category ids
+            'certification_ids.*' => 'integer|exists:certifications,id'
         ]);
 
         $employee = new Employee();
@@ -31,7 +35,11 @@ class EmployeeController extends Controller
         $employee->start_date = $request->start_date;
         $employee->contract_id = $request->contract_id;
 
-        if (! $employee->save()) {
+        $saved = $employee->save();
+
+        $employee->certifications()->attach($request->certification_ids);
+
+        if (! $saved) {
             return response('not saved');
         } else {
             return response('saved');
