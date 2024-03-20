@@ -10,7 +10,7 @@ class ContractController extends Controller
     public function getAll()
     {
         return response()->json([
-            'message' => 'employee returned',
+            'message' => 'contract returned',
             Contract::with(['employee:contract_id,name'])->get(),
         ]);
     }
